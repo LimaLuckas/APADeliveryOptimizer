@@ -29,10 +29,10 @@ std::vector<int> VND(std::vector<int> solucao, const std::vector<std::vector<int
               novaSolucao = swap(solucao, custos, custoAtual);
               break;
           case 2:
-              novaSolucao = Opt2(solucao, int i, int j); // Colocar o outros parametros i e j opt2
+              novaSolucao = Opt2(solucao, custos, custoAtual);
               break;
           case 3:
-              novaSolucao = ReInsertion(solucao, custoAtual, int i, int j); // Colocar o parametros i e j do ReInsertion
+              novaSolucao = ReInsertion(solucao, custos, custoAtual);
               break;
       }
     
