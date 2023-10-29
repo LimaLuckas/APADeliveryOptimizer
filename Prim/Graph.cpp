@@ -15,15 +15,10 @@ void Graph::addEdge(int from, int to, double weight){
 
 }
 
-int Graph::getEdge(int vertexToFind, int linkedTo){
+int Graph::getEdge(int from, int to){
 
-    for(double neighbor : adjacencyMatrix[linkedTo]){
-        if( if neighbor == vertexToFind){
-            return neighbor;
-        }
-    }
+    return adjacencyMatrix[from][to];
 
-    cout << "Vertice nao encontrado" << endl;
 }
 
 void Graph::printGraph(){

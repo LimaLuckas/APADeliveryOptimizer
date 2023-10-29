@@ -20,7 +20,6 @@ int main(){
     vector<int> d = parser.getD();
     vector<vector<int>> c = parser.getC();
 
-
 }
 
 
@@ -29,7 +28,7 @@ void efficienyHeuristic(const int& n, const vector<int>& d, const vector<vector<
     for(int i = 0; i < n; i++){
         for (int j = 0; j < n; j++)
         {   
-            if (c[i][j] == 0)
+            if (i == j)
             {
                 continue;
             }
@@ -41,21 +40,33 @@ void efficienyHeuristic(const int& n, const vector<int>& d, const vector<vector<
 }
 
 
-int prim(const Graph& grafo) {
+int prim(const Graph& grafo, minHeap& priorityQueue, int& begin = 0) {
 
-    vector<bool> inQ(grafo.getV()**2,true);
+    int n = grafo.getV();
+    vector<bool> inQ(n**2,true);
+    vector<pair<double,int>> solution;
 
-    MinHeap priorityQueue(grafo.getV());
+    int adjTo = 0;
 
     while (!priorityQueue.isEmpty())
     {
-        pair<double,int> u = priorityQueue.extractMin();
-        
-        for (const auto& neighbor: grafo.getAdjacencyMatrix()[])
+        solution.emplace_back(priorityQueue.extractMin());
+        inQ[adjTo] = false;
+
+        for (int i = 0; i < n; i++)
         {
-            if (neighbor)
+
+            if (adjTo == i)
             {
-                /* code */
+                continue;
+            }
+
+            double currentValue = grafo.getAdjacencyMatrix[adjTo][i];
+
+            if (inQ[i] == true && currentValue < priorityQueue.getKey(i)); 
+            {
+                priorityQueue.getHeap()[i].second = adjTo;
+                priorityQueue.getHeap()[i].first = currentValue;
             }
             
         }

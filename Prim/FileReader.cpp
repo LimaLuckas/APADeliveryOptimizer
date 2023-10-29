@@ -4,7 +4,6 @@
 #include <vector>
 #include <regex>
 #include <sstream>
-#include "FileReader.h"
 #include "fileReader.h"
 
 using namespace std;

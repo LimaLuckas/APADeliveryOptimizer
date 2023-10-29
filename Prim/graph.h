@@ -8,7 +8,7 @@ private:
 public:
     Graph(int V);
     void addEdge(int from, int to, double weight);
-    int getEdge(int VertexToFind, int linkedTo);
+    int getEdge(int from, int to);
     void printGraph();
     int getV();
     std::vector<std::vector<double>> getAdjacencyMatrix();

@@ -10,6 +10,7 @@ MinHeap::MinHeap(int V){
 
     this.heapStructure = heapStructure(V*V, make_pair(__DBL_MAX__, -1));
     this.heapStructure[0].first = 0.0;
+    buildMinHeap(heapStructure);
 }
 
 
@@ -60,7 +61,7 @@ pair<int,int> MinHeap::extractMin(){
     cout << "Fila de prioridade vazia" << endl;
 }
 
-void MinHeap::buildMinHeap(){
+void MinHeap::buildMinHeap(vector<pair<double,int>>){
 
     for(int i = int(array.size()/2) - 1; i >= 0; i--){
         minHeapify(i);
@@ -70,5 +71,15 @@ void MinHeap::buildMinHeap(){
 bool MinHeap::isEmpty(){
 
     return this.heapStructure.empty();
+}
+
+double MinHeap::getKey(int index){
+
+    return heapStructure[index].first;
+}
+
+std::vector<std::pair<double, int>> MinHeap::getHeap()
+{
+    return heapStructure;
 }
 
