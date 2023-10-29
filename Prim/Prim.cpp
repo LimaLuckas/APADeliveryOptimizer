@@ -28,12 +28,12 @@ void efficienyHeuristic(const int& n, const vector<int>& d, const vector<vector<
     for(int i = 0; i < n; i++){
         for (int j = 0; j < n; j++)
         {   
-            if (i == j)
+            if (adjMatrix.getAdjacencyMatrix()[i][j] == 0)
             {
                 continue;
             }
             
-            double efficiency = d[i]/c[i][j];
+            double efficiency = c[i][j]/d[i];
             adjMatrix.addEdge(i,j,efficiency);
         }
     }
@@ -42,30 +42,30 @@ void efficienyHeuristic(const int& n, const vector<int>& d, const vector<vector<
 
 int prim(const Graph& grafo, minHeap& priorityQueue, int& begin = 0) {
 
-    int n = grafo.getV();
-    vector<bool> inQ(n**2,true);
-    vector<pair<double,int>> solution;
+    int n = grafo.getV(); // numero de iteracoes: mesmo numero de vertices
+    vector<bool> inQ(n,true); // vetor para saber se um elemento esta em Q
+    pair<double,int> u; //elemento de Q a ser obtido
 
-    int adjTo = 0;
+    int adjTo = 0; // Coluna a se procurar arestas adjacentes
 
     while (!priorityQueue.isEmpty())
     {
-        solution.emplace_back(priorityQueue.extractMin());
+        u = priorityQueue.extractMin();
         inQ[adjTo] = false;
 
         for (int i = 0; i < n; i++)
         {
 
-            if (adjTo == i)
+            double currentValue = grafo.getAdjacencyMatrix[adjTo][i];
+
+            if (currentValue == 0.0)
             {
                 continue;
             }
 
-            double currentValue = grafo.getAdjacencyMatrix[adjTo][i];
-
             if (inQ[i] == true && currentValue < priorityQueue.getKey(i)); 
             {
-                priorityQueue.getHeap()[i].second = adjTo;
+                priorityQueue.getHeap()[i].second = int(i/2);
                 priorityQueue.getHeap()[i].first = currentValue;
             }
             

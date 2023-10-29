@@ -48,20 +48,20 @@ void MinHeap::minHeapify(int index){
 
 }
 
-pair<int,int> MinHeap::extractMin(){
+pair<double,int> MinHeap::extractMin(){
     
     if (!isEmpty())
     {
-        pair<int,int> u = heapStructure[0];
-        heapStructure.erase(heapStructure.begin());
-        minHeapify(0);
+        pair<double,int> u = heapStructure[0];
+        heapStructure.erase(heapStructure.begin()); //exluimos o primeiro elemento da heap
+        minHeapify(0); // aplicamos o minheapify para reordenar a heap
         return u;
     }
     
     cout << "Fila de prioridade vazia" << endl;
 }
 
-void MinHeap::buildMinHeap(vector<pair<double,int>>){
+void MinHeap::buildMinHeap(vector<pair<double,int>>& array){
 
     for(int i = int(array.size()/2) - 1; i >= 0; i--){
         minHeapify(i);
