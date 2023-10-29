@@ -8,8 +8,9 @@ using namespace std;
 
 MinHeap::MinHeap(int V){
 
-    this.heapStructure = heapStructure(V*V, make_pair(__DBL_MAX__, -1));
-    this.heapStructure[0].first = 0.0;
+    heapStructure = heapStructure(V,HeapElement(-1,__DBL_MAX__,-1));
+    heapStructure[0].key = 0.0;
+    heapStructure[0].num = 0;
     buildMinHeap(heapStructure);
 }
 
@@ -28,12 +29,12 @@ void MinHeap::minHeapify(int index){
     int menor = index;
 
     if (leftChildIndex <= this.heapStructure.size() &&
-    this.heapStructure[leftChildIndex].first < this.heapStructure[menor].first){
+    this.heapStructure[leftChildIndex].key < this.heapStructure[menor].key){
         
         menor = leftChildIndex;
     }
     if (rightChildIndex <= this.heapStructure.size() &&
-    this.heapStructure[rightChildIndex].first < this.heapStructure[menor].first){
+    this.heapStructure[rightChildIndex].key < this.heapStructure[menor].key){
         
         menor = rightChildIndex;
     }
@@ -48,11 +49,11 @@ void MinHeap::minHeapify(int index){
 
 }
 
-pair<double,int> MinHeap::extractMin(){
+HeapElement MinHeap::extractMin(){
     
     if (!isEmpty())
     {
-        pair<double,int> u = heapStructure[0];
+        HeapElement u = heapStructure[0];
         heapStructure.erase(heapStructure.begin()); //exluimos o primeiro elemento da heap
         minHeapify(0); // aplicamos o minheapify para reordenar a heap
         return u;
@@ -61,7 +62,7 @@ pair<double,int> MinHeap::extractMin(){
     cout << "Fila de prioridade vazia" << endl;
 }
 
-void MinHeap::buildMinHeap(vector<pair<double,int>>& array){
+void MinHeap::buildMinHeap(vector<HeapElement>& array){
 
     for(int i = int(array.size()/2) - 1; i >= 0; i--){
         minHeapify(i);
@@ -75,10 +76,10 @@ bool MinHeap::isEmpty(){
 
 double MinHeap::getKey(int index){
 
-    return heapStructure[index].first;
+    return heapStructure[index].key;
 }
 
-std::vector<std::pair<double, int>> MinHeap::getHeap()
+std::vector<HeapElement> MinHeap::getHeap()
 {
     return heapStructure;
 }
