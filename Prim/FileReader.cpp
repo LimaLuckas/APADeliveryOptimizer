@@ -8,24 +8,27 @@
 
 using namespace std;
 
-FileReader::FileReader(){}
+FileReader::FileReader(string filename){
+    this->filename = filename;
+}
 
-void FileReader::readfileData(vector<string>& fileData) {
-    ifstream file("your_file.txt");
+void FileReader::readfileData() {
+    
+    ifstream file(filename);
 
     if (!file.is_open()) {
-        std::cerr << "Unable to open the file." << std::endl;
-        return 1;
+        std::cerr << "Nao foi possivel abrir o arquivo" << std::endl;
+        return;
     }
 
     //variaveis
 
-    file >> this.n >> this.k >> this.Q >> this.L >> this.r;
+    file >> n >> k >> Q >> L >> r;
 
     // array p
-    this.p = readArray();
+    p = readArray(file);
     // array d
-    this.d = readArray();
+    d = readArray(file);
 
     //matriz
     vector<vector<int>> matrix;
@@ -40,13 +43,13 @@ void FileReader::readfileData(vector<string>& fileData) {
         matrix.push_back(row);
     }
 
-    this.c = matrix;
+    c = matrix;
 
     file.close();
 }
 
 
-vector<int> FileReader::readArray()
+vector<int> FileReader::readArray(ifstream& file)
 {
     std::string arrayLine;
     std::getline(file, arrayLine);
@@ -57,21 +60,21 @@ vector<int> FileReader::readArray()
     while (arrayStream >> arrayElement) {
         array.push_back(arrayElement);
     }
-
+    return array;
 }
 
-int FileReader::getN(){return this.n}
+int FileReader::getN(){return n;}
 
-int FileReader::getK(){return this.k}
+int FileReader::getK(){return k;}
 
-int FileReader::getQ(){return this.Q}
+int FileReader::getQ(){return Q;}
 
-int FileReader::getL(){return this.L}
+int FileReader::getL(){return L;}
 
-int FileReader::getR(){return this.r}
+int FileReader::getR(){return r;}
 
-vector<int> FileReader::getP(){return this.p}
+vector<int> FileReader::getP(){return p;}
 
-vector<int> FileReader::getD(){return this.d}
+vector<int> FileReader::getD(){return d;}
 
-vector<vector<int>> FileReader::getC(){return this.c}
+vector<vector<int>> FileReader::getC(){return c;}

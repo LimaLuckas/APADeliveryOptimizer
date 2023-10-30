@@ -21,23 +21,12 @@ int Graph::getEdge(int from, int to){
 
 }
 
-void Graph::printGraph(){
-
-    for (int i = 0; i < V; ++i) {
-        std::cout << "Edges from vertex " << i << ": ";
-        for (const auto& neighbor : adj[i]) {
-            std::cout << "(" << neighbor.first << ", " << neighbor.second << ") ";
-        }
-        cout << endl;
-    }
-}
-
 int Graph::getV(){
-    return this->V;
+    return V;
 }
 
 
 std::vector<std::vector<double>> Graph::getAdjacencyMatrix()
 {
-    return this->adjacencyMatrix;
+    return adjacencyMatrix;
 }

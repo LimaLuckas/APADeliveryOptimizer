@@ -1,15 +1,16 @@
+#include <vector>
 #ifndef MINHEAP_H
 #define MINHEAP_H
 
-typedef struct HeapElement{
+struct HeapElement{
 
     int num; // numero do vertice
     double key; // valor de custo
     int parent; // numero do vertice pai
 
-    HeapElement(int n, double k, int p): num(n), key(k), parent(p){}    
+    HeapElement(): num(-1), key(__DBL_MAX__), parent(-1){}    
 
-} HeapElement;
+};
 
 class MinHeap{
 
@@ -17,7 +18,7 @@ class MinHeap{
         std::vector<HeapElement> heapStructure; // vetor de elementos heap que será nossa min heap
     public:
         MinHeap(int V);
-        void buildMinHeap(const std::vector<HeapElement>& array); //iniciar a heap
+        void buildMinHeap(); //iniciar a heap
         void minHeapify(int index); //ordenar a heap minima
         HeapElement extractMin(); //extrair o valor com o minimo custo
         bool isEmpty(); //checar se esta vazia

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <pair>
 #include "minheap.h"
 
 using namespace std;
@@ -8,10 +7,10 @@ using namespace std;
 
 MinHeap::MinHeap(int V){
 
-    heapStructure = heapStructure(V,HeapElement(-1,__DBL_MAX__,-1));
+    vector<HeapElement> heapStructure(V);
     heapStructure[0].key = 0.0;
     heapStructure[0].num = 0;
-    buildMinHeap(heapStructure);
+    buildMinHeap();
 }
 
 
@@ -28,22 +27,22 @@ void MinHeap::minHeapify(int index){
 
     int menor = index;
 
-    if (leftChildIndex <= this.heapStructure.size() &&
-    this.heapStructure[leftChildIndex].key < this.heapStructure[menor].key){
+    if (leftChildIndex < heapStructure.size() &&
+    heapStructure[leftChildIndex].key < heapStructure[menor].key){
         
         menor = leftChildIndex;
     }
-    if (rightChildIndex <= this.heapStructure.size() &&
-    this.heapStructure[rightChildIndex].key < this.heapStructure[menor].key){
+    if (rightChildIndex < heapStructure.size() &&
+    heapStructure[rightChildIndex].key < heapStructure[menor].key){
         
         menor = rightChildIndex;
     }
     
     if (menor != index){
         
-        int temp = this.heapStructure[index];
-        this.heapStructure[index] = this.heapStructure[menor];
-        this.heapStructure[menor] = temp;
+        HeapElement temp = heapStructure[index];
+        heapStructure[index] = heapStructure[menor];
+        heapStructure[menor] = temp;
         minHeapify(menor);
     }
 
@@ -62,16 +61,16 @@ HeapElement MinHeap::extractMin(){
     cout << "Fila de prioridade vazia" << endl;
 }
 
-void MinHeap::buildMinHeap(vector<HeapElement>& array){
+void MinHeap::buildMinHeap(){
 
-    for(int i = int(array.size()/2) - 1; i >= 0; i--){
+    for(int i = int(heapStructure.size()/2) - 1; i >= 0; i--){
         minHeapify(i);
     }
 }
 
 bool MinHeap::isEmpty(){
 
-    return this.heapStructure.empty();
+    return heapStructure.empty();
 }
 
 double MinHeap::getKey(int index){

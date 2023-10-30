@@ -1,10 +1,12 @@
+#include <fstream>
+#include <sstream>
 #ifndef FILEREADER_H
 #define FILEREADER_H
 
 class FileReader {
     public:
-        FileReader();
-        void readfileData(std::vector<std::string>& fileData);
+        FileReader(std::string filename);
+        void readfileData();
         int getN();
         int getK();
         int getQ();
@@ -14,12 +16,13 @@ class FileReader {
         std::vector<int> getD();
         std::vector<std::vector<int>> getC();
     private:
-        
+
+        std::string filename;
         int n,k,Q,L,r;
         std::vector<int> p;
-        std::vector<int> v;
-        std::vector<std::vector> c;
-        std::vector<int> readArray();
+        std::vector<int> d;
+        std::vector<std::vector<int>> c;
+        std::vector<int> readArray(std::ifstream& file);
 };
 
 #endif
