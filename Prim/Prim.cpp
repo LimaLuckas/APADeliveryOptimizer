@@ -29,7 +29,7 @@ int prim(Graph& grafo, const vector<vector<int>>& c, vector<bool>& inQueue) {
     int n = grafo.getV(); // numero de iteracoes: mesmo numero de vertices
     MinHeap priorityQueue(n);// vetor para saber se um elemento esta em Q
     HeapElement u; //elemento de Q a ser obtido
-    int solucao;
+    int solucao = 0;
 
     int adjTo = 0; // Coluna a se procurar arestas adjacentes
 
@@ -44,7 +44,7 @@ int prim(Graph& grafo, const vector<vector<int>>& c, vector<bool>& inQueue) {
         
         inQueue[adjTo] = false;
 
-        for (int i = 0; i < n; i++)
+        for(int i = 0; i < n; i++)
         {
 
             double currentValue = grafo.getAdjacencyMatrix()[adjTo][i]; //custo da aresta do vertice i adjacente ao vertice representado por adjTo
@@ -63,9 +63,9 @@ int prim(Graph& grafo, const vector<vector<int>>& c, vector<bool>& inQueue) {
             }
             
         }
-        return solucao;  
+         
     }
-    
+    return solucao;  
 }
 
 int main(){
